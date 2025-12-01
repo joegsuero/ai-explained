@@ -1,0 +1,139 @@
+{% extends "base.html" %} {% block title %}Decision Analysis - Rule-Based AI System{% endblock %} {% block extra_css %}
+<style>
+  .decision-header {
+      background: {{ status_color }};
+      color: white;
+      padding: 40px;
+      text-align: center;
+      border-bottom: 4px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .decision-summary {
+      background: rgba(52, 152, 219, 0.1);
+      border: 1px solid var(--secondary-color);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      margin-bottom: 30px;
+      text-align: center;
+  }
+
+  .decision-outcome {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin: 20px 0;
+      color: {{ status_color }};
+  }
+
+  .rules-summary {
+      display: inline-flex;
+      align-items: center;
+      background: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: var(--dark-color);
+      border: 1px solid #e0e0e0;
+  }
+</style>
+{% endblock %} {% block content %}
+<div class="decision-header">
+  <h1>Application Decision Analysis</h1>
+  <p>{{ decision.decision_explanation }}</p>
+</div>
+
+<div class="content">
+  <div class="decision-summary">
+    <div class="decision-outcome">{{ status_text }}</div>
+    <p>
+      Based on evaluation of {{ decision.executed_rules|length }}/{{ total_rules
+      }} business rules
+    </p>
+    <div class="rules-summary">
+      <strong>Rules Executed:</strong>
+      <span style="margin-left: 10px"
+        >{{ decision.executed_rules|join:", " }}</span
+      >
+    </div>
+  </div>
+
+  <h3>Rule Evaluation Results</h3>
+  <div class="rules-results">
+    {% for explanation in decision.explanations %}
+    <div class="rule-result rule-passed">
+      <div class="rule-icon">✓</div>
+      <div><strong>Rule Passed:</strong> {{ explanation }}</div>
+    </div>
+    {% endfor %} {% for reason in decision.rejection_reasons %}
+    <div class="rule-result rule-failed">
+      <div class="rule-icon">✗</div>
+      <div><strong>Rule Failed:</strong> {{ reason }}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if decision.approved and decision.interest_rate %}
+  <div class="loan-terms-panel">
+    <h3>Approved Loan Terms</h3>
+    <div class="grid grid-3">
+      <div
+        class="info-card"
+        style="
+          background: rgba(255, 255, 255, 0.15);
+          border: none;
+          color: white;
+        "
+      >
+        <div class="metric-value">
+          {{ decision.interest_rate|floatformat:2 }}%
+        </div>
+        <div class="metric-label">Annual Interest Rate (APR)</div>
+        <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.9">
+          Risk-adjusted rate based on applicant profile
+        </p>
+      </div>
+
+      <div
+        class="info-card"
+        style="
+          background: rgba(255, 255, 255, 0.15);
+          border: none;
+          color: white;
+        "
+      >
+        <div class="metric-value">
+          ${{ decision.monthly_payment|floatformat:2 }}
+        </div>
+        <div class="metric-label">Monthly Payment</div>
+        <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.9">
+          For {{ decision.loan_term }} months
+        </p>
+      </div>
+
+      <div
+        class="info-card"
+        style="
+          background: rgba(255, 255, 255, 0.15);
+          border: none;
+          color: white;
+        "
+      >
+        <div class="metric-value">${{ total_cost|floatformat:2 }}</div>
+        <div class="metric-label">Total Cost of Credit</div>
+        <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.9">
+          Principal + Interest over loan term
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div style="text-align: center; margin-top: 40px">
+    <a href="/" class="btn btn-secondary">Submit Another Application</a>
+  </div>
+
+  <div class="footer">
+    <p>Rule-Based AI Decision System</p>
+  </div>
+  {% endblock %}
+</div>

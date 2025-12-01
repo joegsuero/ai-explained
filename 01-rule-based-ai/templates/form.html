@@ -1,0 +1,174 @@
+{% extends "base.html" %} {% block title %}Credit Application Evaluation{%endblock %} {% block content %}
+<div class="header">
+  <h1>Rule-Based AI Credit System</h1>
+  <p>Transparent Decision Engine Using Explicit Business Rules</p>
+</div>
+
+<div class="content">
+  <h2>Credit Application Form</h2>
+  <p>
+    Complete the form below. The AI system will evaluate your application using
+    a transparent rule-based decision engine.
+  </p>
+
+  <form method="POST" action="">
+    <div class="grid grid-3">
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input
+          type="number"
+          id="age"
+          name="age"
+          required
+          min="18"
+          max="100"
+          value="30"
+        />
+        <small>Minimum age requirement: 18 years</small>
+      </div>
+
+      <div class="form-group">
+        <label for="monthly_income">Monthly Income ($):</label>
+        <input
+          type="number"
+          id="monthly_income"
+          name="monthly_income"
+          required
+          min="0"
+          value="5000"
+          step="100"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="current_debt">Current Debt ($):</label>
+        <input
+          type="number"
+          id="current_debt"
+          name="current_debt"
+          required
+          min="0"
+          value="1000"
+          step="100"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="credit_score">Credit Score:</label>
+        <input
+          type="number"
+          id="credit_score"
+          name="credit_score"
+          required
+          min="300"
+          max="850"
+          value="720"
+        />
+        <small>Range: 300-850 (minimum: 600)</small>
+      </div>
+
+      <div class="form-group">
+        <label for="stable_employment">Employment Status:</label>
+        <select id="stable_employment" name="stable_employment">
+          <option value="true">Stable Employment (>2 years)</option>
+          <option value="false">Less than 2 years or Unstable</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="loan_amount">Loan Amount ($):</label>
+        <input
+          type="number"
+          id="loan_amount"
+          name="loan_amount"
+          required
+          min="100"
+          value="10000"
+          step="100"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="loan_term">Loan Term:</label>
+        <select id="loan_term" name="loan_term">
+          <option value="12">12 months (1 year)</option>
+          <option value="24" selected>24 months (2 years)</option>
+          <option value="36">36 months (3 years)</option>
+          <option value="48">48 months (4 years)</option>
+          <option value="60">60 months (5 years)</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px">
+      <button type="submit" class="btn">
+        Evaluate Application with AI Engine
+      </button>
+    </div>
+  </form>
+
+  <div class="technical-section">
+    <h3>Business Rules Applied by the AI System</h3>
+
+    <div class="grid">
+      <div class="info-card">
+        <h4>Minimum Age Requirement</h4>
+        <p>
+          Applicant must be at least 18 years of age to be eligible for credit
+          consideration.
+        </p>
+        <div class="status-indicator status-approved">
+          Required for Approval
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h4>Debt-to-Income Ratio</h4>
+        <p>
+          Monthly debt obligations must not exceed 50% of monthly income. This
+          ensures financial stability and repayment capacity.
+        </p>
+        <div class="status-indicator status-approved">
+          Required for Approval
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h4>Credit Score Threshold</h4>
+        <p>
+          Minimum credit score of 600 is required, with tiered interest rates
+          based on score ranges for approved applications.
+        </p>
+        <div class="status-indicator status-approved">
+          Required for Approval
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h4>Employment Stability</h4>
+        <p>
+          Stable employment history (minimum 2 years) is evaluated to assess
+          income continuity and risk profile.
+        </p>
+        <div class="status-indicator">Affects Interest Rate</div>
+      </div>
+
+      <div class="info-card">
+        <h4>Risk-Based Pricing Model</h4>
+        <p>
+          Interest rates are calculated dynamically based on risk factors
+          including credit score, employment stability, and debt ratio.
+        </p>
+        <div class="status-indicator">Calculated for Approved Applications</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>
+      Rule-Based AI Credit System | Demonstrating Transparent and Explainable AI
+      Decision Making
+    </p>
+  </div>
+  {% endblock %}
+</div>
