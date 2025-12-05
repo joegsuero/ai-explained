@@ -3,178 +3,151 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}Rule-Based AI Credit System{% endblock %}</title>
+    <title>{% block title %}Credit Decision System{% endblock %}</title>
     <style>
       :root {
-        /* Minimal color palette */
-        --primary: #333;
-        --secondary: #007bff;
-        --bg-light: #f4f4f9;
-        --border-color: #e0e0e0;
-        --success: #28a745;
-        --danger: #dc3545;
+        --text-primary: #1a1a1a;
+        --text-secondary: #666;
+        --border: #e0e0e0;
+        --bg: #ffffff;
+        --bg-secondary: #f9f9f9;
       }
 
       * {
-        box-sizing: border-box;
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
       }
 
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, sans-serif;
-        line-height: 1.6;
-        color: var(--primary);
-        background-color: var(--bg-light);
-        min-height: 100vh;
-        padding: 40px 0;
+          Oxygen, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--text-primary);
+        background: var(--bg);
+        padding: 24px;
+        max-width: 800px;
+        margin: 0 auto;
       }
 
       .container {
-        max-width: 900px; /* Reduced max-width for focus */
-        margin: 0 auto;
-        padding: 0 20px;
-      }
-
-      .card {
-        background: white;
-        border-radius: 6px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        background: var(--bg);
       }
 
       .header {
-        background: var(--primary);
-        color: white;
-        padding: 30px;
-        text-align: center;
-        border-bottom: 5px solid var(--secondary);
+        padding: 24px;
+        border-bottom: 1px solid var(--border);
       }
 
       .header h1 {
-        font-size: 1.8rem;
+        font-size: 18px;
         font-weight: 500;
-        margin-bottom: 5px;
+        margin-bottom: 4px;
       }
 
       .header p {
-        font-size: 0.9rem;
-        opacity: 0.8;
+        font-size: 13px;
+        color: var(--text-secondary);
       }
 
       .content {
-        padding: 30px;
+        padding: 24px;
       }
 
-      h2,
-      h3,
-      h4 {
-        color: var(--primary);
+      h2 {
+        font-size: 15px;
         font-weight: 500;
-        margin-bottom: 15px;
-        border-bottom: 1px solid var(--border-color);
-        padding-bottom: 5px;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 32px;
       }
 
       .form-group {
-        margin-bottom: 20px;
+        margin-bottom: 0;
       }
 
       label {
         display: block;
-        margin-bottom: 5px;
+        font-size: 12px;
         font-weight: 500;
-        font-size: 0.9rem;
+        margin-bottom: 6px;
+        color: var(--text-secondary);
       }
 
       input,
       select {
         width: 100%;
-        padding: 10px 12px;
-        border: 1px solid var(--border-color);
-        border-radius: 4px;
-        font-size: 0.95rem;
-        transition: border-color 0.2s;
+        padding: 8px 10px;
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        font-size: 13px;
+        font-family: inherit;
+        background: var(--bg);
       }
 
       input:focus,
       select:focus {
         outline: none;
-        border-color: var(--secondary);
+        border-color: #999;
       }
 
-      .grid {
-        display: grid;
-        gap: 20px;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      }
-
-      .btn {
-        display: inline-block;
-        background: var(--secondary);
+      .submit-btn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background: var(--text-primary);
         color: white;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 4px;
-        font-weight: 500;
         border: none;
-        cursor: pointer;
-        transition: background 0.2s;
-        font-size: 0.95rem;
-      }
-
-      .btn:hover {
-        background: #0056b3;
-      }
-
-      .technical-section {
-        background: var(--bg-light);
-        padding: 20px;
-        border-radius: 4px;
-        margin-top: 30px;
-        border: 1px solid var(--border-color);
-      }
-
-      .info-card {
-        padding: 15px;
-        border-left: 3px solid var(--secondary);
-        background: white;
-        border-radius: 4px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-      }
-
-      .status-indicator {
-        display: inline-block;
-        padding: 4px 8px;
         border-radius: 3px;
-        font-size: 0.75rem;
-        margin-top: 10px;
+        font-size: 13px;
         font-weight: 500;
+        cursor: pointer;
+        transition: opacity 0.2s;
       }
 
-      .status-approved {
-        background-color: #d4edda;
-        color: var(--success);
+      .submit-btn:hover {
+        opacity: 0.9;
       }
 
-      .status-rejected {
-        background-color: #f8d7da;
-        color: var(--danger);
+      .rules-section {
+        margin-top: 32px;
+        padding: 20px;
+        background: var(--bg-secondary);
+        border-radius: 3px;
       }
 
-      @media (max-width: 700px) {
-        .grid {
-          grid-template-columns: 1fr;
-        }
+      .rules-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .rule-item {
+        font-size: 12px;
+      }
+
+      .rule-item h4 {
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+
+      .rule-item p {
+        color: var(--text-secondary);
       }
     </style>
-    {% block extra_css %}{% endblock %}
   </head>
   <body>
-    <div class="container">
-      <div class="card">{% block content %} {% endblock %}</div>
-    </div>
-    {% block extra_js %}{% endblock %}
+    <div class="container">{% block content %}{% endblock %}</div>
   </body>
 </html>
