@@ -4,7 +4,7 @@ A demonstration of symbolic artificial intelligence using explicit business rule
 
 ## Overview
 
-This project implements a **rule-based expert system** - a classic form of symbolic AI that uses explicit IF-THEN rules to make decisions. Unlike machine learning approaches, every decision is fully explainable and based on human-defined business logic. For more details, see the accompanying blog post [].
+This project implements a **rule-based expert system** - a classic form of symbolic AI that uses explicit IF-THEN rules to make decisions. Unlike machine learning approaches, every decision is fully explainable and based on human-defined business logic. For more details, see the accompanying blog post [here](https://medium.com/@joegsuero/filling-the-gaps-in-ai-part-2-rule-based-systems-02c32fea6747).
 
 The system evaluates credit applications using a forward-chaining inference engine that applies business rules sequentially, building up facts about the application until a final decision is reached.
 
