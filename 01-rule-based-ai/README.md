@@ -1,10 +1,10 @@
 # Rule-Based AI Credit Decision System
 
-A production-ready demonstration of symbolic artificial intelligence using explicit business rules for transparent and explainable decision making. Built with Django as a microframework.
+A demonstration of symbolic artificial intelligence using explicit business rules for transparent and explainable decision making. Built with Django as a microframework.
 
 ## Overview
 
-This project implements a **rule-based expert system** - a classic form of symbolic AI that uses explicit IF-THEN rules to make decisions. Unlike machine learning approaches, every decision is fully explainable and based on human-defined business logic. For more details, see the accompanying blog post.
+This project implements a **rule-based expert system** - a classic form of symbolic AI that uses explicit IF-THEN rules to make decisions. Unlike machine learning approaches, every decision is fully explainable and based on human-defined business logic. For more details, see the accompanying blog post [].
 
 The system evaluates credit applications using a forward-chaining inference engine that applies business rules sequentially, building up facts about the application until a final decision is reached.
 
@@ -12,7 +12,6 @@ The system evaluates credit applications using a forward-chaining inference engi
 
 - **Transparent Decision Making**: Every decision is fully traceable to specific business rules
 - **Forward-Chaining Inference Engine**: Rules are evaluated in sequence, with each rule potentially adding new facts to the context
-- **Production-Ready Architecture**: Clean separation of concerns between rules, engine, and interface
 - **REST API**: Programmatic access to the decision engine
 - **Explainability**: Detailed explanations of which rules passed or failed
 - **Configurable Rules**: Business rules are stored separately from the engine logic
