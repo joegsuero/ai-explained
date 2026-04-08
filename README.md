@@ -31,7 +31,7 @@ Each project follows these principles:
 
 | Project                                                      | Paradigm                 | Description                                            | Key Concepts                                                                   |
 | ------------------------------------------------------------ | ------------------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| **[01-rule-based-ai](01-rule-based-credit/)**   | Rule-Based Systems       | Credit decision engine using explicit business rules   | Forward-chaining inference, transparent decision-making, business rule engines |
+| **[01-rule-based-ai](01-rule-based-ai/)**   | Rule-Based Systems       | Credit decision engine using explicit business rules   | Forward-chaining inference, transparent decision-making, business rule engines |
 
 ## Getting Started
 
@@ -49,10 +49,9 @@ git --version
 
 ```bash
 git clone https://github.com/joegsuero/ai-explained.git
-cd ai-implementation-series
 
 # Install dependencies per project (recommended)
-cd projects/01-rule-based-ai
+cd ai-explained/01-rule-based-ai
 pip install -r requirements.txt
 ```
 
@@ -61,7 +60,7 @@ pip install -r requirements.txt
 Each project is self-contained with its own documentation:
 
 ```bash
-cd projects/01-rule-based-ai
+cd ai-explained/01-rule-based-ai
 
 # Read project-specific instructions
 cat README.md
@@ -105,9 +104,9 @@ Use this guide to choose the right implementation for your needs:
 | Your Goal                      | Recommended Project              | Why                                   |
 | ------------------------------ | -------------------------------- | ------------------------------------- |
 | **Need explainable decisions** | 01-rule-based-credit             | Transparent rule-based reasoning      |
-| **Have structured knowledge**  | 02-semantic-ecommerce            | Explicit knowledge representation     |
-| **Classical data analysis**    | 03-classical-ml-classification   | Interpretable statistical models      |
+| **Have structured knowledge**  | 02-semantic-ecommerce (WIP)            | Explicit knowledge representation     |
+<!-- | **Classical data analysis**    | 03-classical-ml-classification   | Interpretable statistical models      |
 | **Understand AI fundamentals** | 04-neural-networks-foundations   | Neural networks from first principles |
 | **Image/vision tasks**         | 05-deep-learning-computer-vision | State-of-the-art computer vision      |
 | **Recommendation systems**     | 06-hybrid-recommendation         | Combining multiple AI approaches      |
-| **Text/language processing**   | 07-nlp-transformers              | Modern natural language understanding |
+| **Text/language processing**   | 07-nlp-transformers              | Modern natural language understanding | -->

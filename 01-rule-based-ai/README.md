@@ -4,7 +4,7 @@ A production-ready demonstration of symbolic artificial intelligence using expli
 
 ## Overview
 
-This project implements a **rule-based expert system** - a classic form of symbolic AI that uses explicit IF-THEN rules to make decisions. Unlike machine learning approaches, every decision is fully explainable and based on human-defined business logic.
+This project implements a **rule-based expert system** - a classic form of symbolic AI that uses explicit IF-THEN rules to make decisions. Unlike machine learning approaches, every decision is fully explainable and based on human-defined business logic. For more details, see the accompanying blog post.
 
 The system evaluates credit applications using a forward-chaining inference engine that applies business rules sequentially, building up facts about the application until a final decision is reached.
 
@@ -72,24 +72,25 @@ This system uses **forward-chaining inference**, which means:
 4. The process continues until no more rules can be applied
 5. The final decision is based on the accumulated facts
 
+---
+![Engine Flowchart](/01-rule-based-ai/assets/engine-flowchart.png)
+
 ### Example Rule Evaluation
 
 ```python
 # Rule Definition
 Rule(
-    name="debt_to_income",
-    condition=lambda ctx: ctx['monthly_income'] > 0 and
-                         (ctx['current_debt'] / ctx['monthly_income']) < 0.5,
-    action=lambda ctx: ctx.update({'debt_ratio_ok': True}),
-    explanation_func=lambda ctx: f"Debt ratio acceptable: {ratio:.1%}"
+    name="minimum_age",
+    description="Applicant must be at least 18 years old",
+    condition=lambda ctx: ctx['age'] >= 18,
+    action=lambda ctx: ctx.update({'eligible': True}),
+    explanation_func=lambda ctx: (
+        f"Applicant age {ctx['age']} meets minimum requirement (18+)"
+    ),
+    failure_message=lambda ctx: (
+        f"Age {ctx['age']} is below minimum requirement (18)"
+    ),
 )
-
-# During evaluation, if the applicant has:
-# - Monthly income: $5,000
-# - Current debt: $1,000
-# Then: 1000 / 5000 = 0.2 (20%) < 50% → Rule PASSES
-# The context is updated with: {'debt_ratio_ok': True}
-# Explanation generated: "Debt ratio acceptable: 20.0%"
 ```
 
 ### Benefits Over Simple If-Else Logic
@@ -115,8 +116,8 @@ This project uses Django in a microframework pattern based on Carlton Gibson's D
 ### Installation & Setup
 
 ```bash
-git clone https://github.com/joegsuero/rule-based-ai.git
-cd rule-based-ai
+git clone https://github.com/joegsuero/ai-explained.git
+cd ai-explained/01-rule-based-ai
 
 pip install -r requirements.txt
 
@@ -150,25 +151,20 @@ This type of rule-based AI system is ideal for:
 
 ```python
 @staticmethod
-def create_new_business_rule():
-    """Example of adding a new rule"""
-    return Rule(
-        name="loan_to_value",
-        condition=lambda ctx: (ctx['loan_amount'] / ctx['property_value']) < 0.8,
-        action=lambda ctx: ctx.update({'ltv_ok': True}),
-        explanation_func=lambda ctx: f"Loan-to-value ratio: {(ctx['loan_amount']/ctx['property_value']):.1%}",
-        failure_message="Loan amount exceeds 80% of property value"
-    )
-```
-
-### Modifying Rule Logic
-
-Business rules can be modified independently without affecting the engine:
-
-```python
-# To change the debt-to-income threshold from 50% to 40%
-condition=lambda ctx: ctx['monthly_income'] > 0 and
-                     (ctx['current_debt'] / ctx['monthly_income']) < 0.4,
+    def create_credit_score_rule():
+        """Rule 3: Minimum credit score of 600 required"""
+        return Rule(
+            name="minimum_credit_score",
+            description="Credit score must be at least 600",
+            condition=lambda ctx: ctx['credit_score'] >= 600,
+            action=lambda ctx: ctx.update({'credit_score_ok': True}),
+            explanation_func=lambda ctx: (
+                f"Credit score {ctx['credit_score']} meets minimum (600+)"
+            ),
+            failure_message=lambda ctx: (
+                f"Credit score {ctx['credit_score']} is below minimum (600)"
+            ),
+        )
 ```
 
 ## Limitations and Considerations
